@@ -39,7 +39,7 @@ fi
 
 # Test verileri ekleme
 echo "Test verileri ekleniyor..."
-npx tsx scripts/seed.ts
+NODE_ENV=development SEED_FORCE=true npx tsx server/seed.ts
 
 echo "--------------------------"
 echo "Kurulum tamamlandı!"
