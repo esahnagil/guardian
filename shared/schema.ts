@@ -119,7 +119,7 @@ export const httpConfigSchema = z.object({
   body: z.string().optional(),
   expectedStatus: z.number().min(100).max(599).default(200),
   timeout: z.number().min(1).default(5), // seconds
-  validateSsl: z.boolean().default(true),
+  validateSSL: z.boolean().default(true),
 });
 
 export const tcpConfigSchema = z.object({

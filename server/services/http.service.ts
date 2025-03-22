@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { HTTPConfig } from '@shared/schema';
+import { HTTPConfig } from '../../shared/schema';
 
 export class HTTPService {
   /**
@@ -21,7 +21,7 @@ export class HTTPService {
     if (useRealRequest) {
       try {
         const { url, method, headers, body, timeout } = config;
-        const validateSSL = config.validateSsl;
+        const validateSSL = config.validateSSL;
         
         // Setup request options
         const options = {
