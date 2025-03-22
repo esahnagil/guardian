@@ -123,18 +123,10 @@ const DeviceList = () => {
 
   // Get latest status for each device
   const devicesWithStatus = devices?.map(device => {
-    // If device already has status from WebSocket updates, use that
-    if (device.status && (device.responseTime || device.response_time)) {
-      return {
-        ...device,
-        // Ensure we use the correct property names
-        status: device.status,
-        responseTime: device.responseTime || device.response_time,
-        lastCheck: device.lastCheck || device.last_check
-      } as DeviceWithStatus;
-    }
+    // WebSocket may have already updated this device with status properties
+    const deviceWithStatus = device as unknown as DeviceWithStatus;
     
-    const deviceMonitors = monitors?.filter(monitor => monitor.device_id === device.id) || [];
+    const deviceMonitors = monitors?.filter(monitor => monitor.deviceId === device.id) || [];
 
     // Default values
     let worstStatus = 'unknown';
@@ -158,8 +150,8 @@ const DeviceList = () => {
         }
 
         // Capture response time from any monitor
-        if (monitorResult.response_time || monitorResult.responseTime) {
-          responseTime = monitorResult.response_time || monitorResult.responseTime;
+        if (monitorResult.responseTime) {
+          responseTime = monitorResult.responseTime;
         }
 
         // Update last check time if newer
@@ -265,7 +257,7 @@ const DeviceList = () => {
                       <DeviceIcon type={device.type} />
                       <div className="ml-2">
                         <div className="text-sm font-medium">{device.name}</div>
-                        <div className="text-xs text-gray-500">{device.ip_address}</div>
+                        <div className="text-xs text-gray-500">{device.ipAddress}</div>
                       </div>
                     </div>
                   </div>

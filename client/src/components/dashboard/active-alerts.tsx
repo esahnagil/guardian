@@ -105,7 +105,7 @@ const ActiveAlerts = () => {
                 <div>
                   <h4 className="text-sm font-medium">{alert.message}</h4>
                   <p className="text-xs text-gray-500">
-                    Uyarı ID: {alert.id} - Cihaz ID: {alert.device_id}
+                    Uyarı ID: {alert.id} - Cihaz ID: {alert.deviceId}
                   </p>
                 </div>
                 <span className="text-xs text-gray-500">
