@@ -18,6 +18,7 @@ export interface Monitor {
   interval: number;
   createdAt: string;
   updatedAt: string;
+  latestResult?: MonitorResult;
 }
 
 export interface MonitorResult {

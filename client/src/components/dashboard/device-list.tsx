@@ -123,8 +123,13 @@ const DeviceList = () => {
 
   // Get latest status for each device
   const devicesWithStatus = devices?.map(device => {
-    // WebSocket may have already updated this device with status properties
-    const deviceWithStatus = device as unknown as DeviceWithStatus;
+    // Create base device with status properties
+    const deviceWithStatus: DeviceWithStatus = {
+      ...device,
+      status: undefined,
+      responseTime: undefined,
+      lastCheck: undefined
+    };
     
     const deviceMonitors = monitors?.filter(monitor => monitor.deviceId === device.id) || [];
 

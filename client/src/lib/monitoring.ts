@@ -200,8 +200,8 @@ class MonitoringClient {
               return {
                 ...device,
                 status: data.status,
-                response_time: data.response_time,
-                last_check: data.last_check
+                responseTime: data.responseTime || data.response_time,
+                lastCheck: data.lastCheck || data.last_check
               };
             }
             return device;
@@ -219,7 +219,7 @@ class MonitoringClient {
       case 'monitorResult':
         // Update the latest monitor result
         queryClient.setQueryData(
-          ['/api/monitor-results', data.monitor_id, 'latest'],
+          ['/api/monitor-results', data.monitorId || data.monitor_id, 'latest'],
           data.result
         );
 
