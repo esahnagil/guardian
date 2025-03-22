@@ -183,7 +183,7 @@ export async function seedDatabase() {
           method: "GET", 
           expectedStatus: 200, 
           timeout: 5,
-          validateSsl: true
+          validateSSL: true
         },
         enabled: true,
         interval: 60
