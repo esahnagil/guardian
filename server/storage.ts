@@ -735,5 +735,5 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-// Artık daima veritabanını kullanıyoruz
-export const storage = new DatabaseStorage();
+// Veritabanı bağlantısı yoksa MemStorage, varsa DatabaseStorage kullanılır
+export const storage = process.env.DATABASE_URL ? new DatabaseStorage() : new MemStorage();
