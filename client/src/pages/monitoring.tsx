@@ -75,7 +75,7 @@ type MonitorType = 'icmp' | 'snmp' | 'http' | 'tcp';
 
 // Base monitor schema
 const baseMonitorSchema = z.object({
-  device_id: z.coerce.number().min(1, { message: "Please select a device" }),
+  deviceId: z.coerce.number().min(1, { message: "Please select a device" }),
   type: z.string().min(1, { message: "Please select a monitor type" }),
   enabled: z.boolean().default(true),
   interval: z.coerce.number().min(10, { message: "Interval must be at least 10 seconds" }).default(60)
@@ -272,10 +272,10 @@ const Monitoring = () => {
   // Cihaz schema tanımı
   const deviceSchema = z.object({
     name: z.string().min(1, "Cihaz adı girilmelidir"),
-    ip_address: z.string().ip("Geçerli bir IP adresi girin"),
+    ipAddress: z.string().ip("Geçerli bir IP adresi girin"),
     type: z.string().min(1, "Cihaz türü seçilmelidir"),
     location: z.string().optional(),
-    maintenance_mode: z.boolean().default(false)
+    maintenanceMode: z.boolean().default(false)
   });
   
   // Cihaz tipi için form değişkeni
@@ -462,7 +462,7 @@ const Monitoring = () => {
       const transformedData = transformFormData(values);
       // Uyumlu payload oluştur
       const payload = {
-        device_id: transformedData.device_id,
+        device_id: transformedData.deviceId, // Arayüzde camelCase, API'ye gönderirken snake_case
         type: transformedData.type,
         config: transformedData.config,
         enabled: transformedData.enabled,
