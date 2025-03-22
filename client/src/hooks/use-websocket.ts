@@ -13,7 +13,7 @@ export function useWebSocket() {
 
   useEffect(() => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const wsUrl = `${protocol}//${window.location.host}/ws`;
+    const wsUrl = `${protocol}//${window.location.host}/ws/monitoring`;
     
     const socket = new WebSocket(wsUrl);
     socketRef.current = socket;
