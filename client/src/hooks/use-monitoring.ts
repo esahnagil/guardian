@@ -38,7 +38,7 @@ export function useMonitoring(options: UseMonitoringOptions = {}) {
         case 'reconnecting':
           setStatus('reconnecting');
           break;
-        case 'reconnect_failed':
+        case 'reconnectFailed':
           // Otomatik yeniden bağlanma başarısız olduğunda
           setStatus('disconnected');
           break;

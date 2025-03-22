@@ -141,7 +141,7 @@ class MonitoringClient {
   private attemptReconnect() {
     if (this.reconnectAttempts >= this.maxReconnectAttempts) {
       console.log("Maximum reconnection attempts reached");
-      this.notifyCallbacks('reconnect_failed', { 
+      this.notifyCallbacks('reconnectFailed', { 
         attempts: this.reconnectAttempts 
       });
       return;
@@ -200,8 +200,8 @@ class MonitoringClient {
               return {
                 ...device,
                 status: data.status,
-                responseTime: data.responseTime || data.response_time,
-                lastCheck: data.lastCheck || data.last_check
+                responseTime: data.responseTime,
+                lastCheck: data.lastCheck
               };
             }
             return device;
@@ -219,7 +219,7 @@ class MonitoringClient {
       case 'monitorResult':
         // Update the latest monitor result
         queryClient.setQueryData(
-          ['/api/monitor-results', data.monitorId || data.monitor_id, 'latest'],
+          ['/api/monitor-results', data.monitorId, 'latest'],
           data.result
         );
 
@@ -227,7 +227,7 @@ class MonitoringClient {
         const monitors = queryClient.getQueryData<Monitor[]>(['/api/monitors']);
         if (monitors) {
           const updatedMonitors = monitors.map(monitor => {
-            if (monitor.id === data.monitor_id) {
+            if (monitor.id === data.monitorId) {
               return {
                 ...monitor,
                 latestResult: data.result
