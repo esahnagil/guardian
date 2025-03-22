@@ -286,10 +286,10 @@ const Monitoring = () => {
     resolver: zodResolver(deviceSchema),
     defaultValues: {
       name: '',
-      ip_address: '',
+      ipAddress: '',
       type: 'server',
       location: '',
-      maintenance_mode: false
+      maintenanceMode: false
     }
   });
 
@@ -462,7 +462,7 @@ const Monitoring = () => {
       const transformedData = transformFormData(values);
       // Uyumlu payload oluştur
       const payload = {
-        device_id: transformedData.deviceId, // Arayüzde camelCase, API'ye gönderirken snake_case
+        deviceId: transformedData.deviceId,
         type: transformedData.type,
         config: transformedData.config,
         enabled: transformedData.enabled,
@@ -878,7 +878,7 @@ const Monitoring = () => {
 
   // Group monitors by device
   const monitorsByDevice = monitors?.reduce((acc, monitor) => {
-    const deviceId = monitor.device_id;
+    const deviceId = monitor.deviceId; // Değiştirildi: device_id -> deviceId
     if (!acc[deviceId]) {
       acc[deviceId] = [];
     }
@@ -984,10 +984,10 @@ const Monitoring = () => {
     const formData: Partial<Device> = {};
     
     if (deviceUpdatedValues.name !== undefined) formData.name = deviceUpdatedValues.name;
-    if (deviceUpdatedValues.ip_address !== undefined) formData.ip_address = deviceUpdatedValues.ip_address;
+    if (deviceUpdatedValues.ipAddress !== undefined) formData.ipAddress = deviceUpdatedValues.ipAddress;
     if (deviceUpdatedValues.type !== undefined) formData.type = deviceUpdatedValues.type;
     if (deviceUpdatedValues.location !== undefined) formData.location = deviceUpdatedValues.location;
-    if (deviceUpdatedValues.maintenance_mode !== undefined) formData.maintenance_mode = deviceUpdatedValues.maintenance_mode;
+    if (deviceUpdatedValues.maintenanceMode !== undefined) formData.maintenanceMode = deviceUpdatedValues.maintenanceMode;
     
     console.log("Gönderilecek veriler:", formData);
     updateDeviceMutation.mutate(formData);
@@ -1035,7 +1035,7 @@ const Monitoring = () => {
   const resetMonitorForm = (monitor: Monitor) => {
     form.reset({
       id: monitor.id,
-      device_id: monitor.device_id,
+      deviceId: monitor.deviceId,
       type: monitor.type as any,
       enabled: monitor.enabled,
       interval: monitor.interval,
@@ -1109,7 +1109,7 @@ const Monitoring = () => {
                     )}                  />
                   <FormField
                     control={deviceForm.control}
-                    name="ip_address"
+                    name="ipAddress"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>IP Adresi</FormLabel>
@@ -1162,7 +1162,7 @@ const Monitoring = () => {
                   />
                   <FormField
                     control={deviceForm.control}
-                    name="maintenance_mode"
+                    name="maintenanceMode"
                     render={({ field }) => (
                       <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                         <div className="space-y-0.5">
@@ -1365,7 +1365,7 @@ const Monitoring = () => {
                       size="sm" 
                       onClick={() => {
                         if (selectedDevice) {
-                          form.setValue("device_id", selectedDevice.id);
+                          form.setValue("deviceId", selectedDevice.id);
                           setIsAddMonitorOpen(true);
                         }
                       }}
